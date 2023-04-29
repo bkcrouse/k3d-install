@@ -1,9 +1,9 @@
 #!/bin/bash
 yum update -y
 sed -i 's/secure_path.*/&:\/usr\/local\/bin/' /etc/sudoers
-yum install -y yum-utils 
+yum install -y yum-utils wget git
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-yum install -y git docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 wget -q -O - https://github.com/k3d-io/k3d/releases/download/v5.4.1/k3d-linux-amd64 > /usr/local/bin/k3d && chmod +x /usr/local/bin/k3d && sudo k3d --version
 wget -q -O - https://dl.k8s.io/release/v1.23.5/bin/linux/amd64/kubectl > /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl && ln -s /usr/local/bin/kubectl /usr/local/bin/k
 wget -q -O - https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.5.4/kustomize_v4.5.4_linux_amd64.tar.gz | tar xvfz - && mv kustomize /usr/local/bin && sudo kustomize version
